@@ -10,8 +10,9 @@ import org.junit.runner.RunWith;
         plugin = "html:target/cucumber-reports2.html",
         features = "src/test/resources/features",
         glue = "stepdefinitions",
-        tags = "@wip",
-        dryRun =  false // true oldugunda sadece eksik adim var mi diye kontrol eder
+        tags = "@resim",
+        dryRun =  false
+        // true oldugunda sadece eksik adim var mi diye kontrol eder
 )
 public class Runner {
     // runner classi boş bir classdir
