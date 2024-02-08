@@ -12,6 +12,7 @@ import org.openqa.selenium.Keys;
 import pages.TestOtomasyonPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -161,13 +162,67 @@ public class TestotomasyonStepdefinitions {
     }
 
 
+    @Then("urun excelindeki tum urunler icin arama yapip min miktarda urun oldugunu test eder")
+    public void urunExcelindekiTumUrunlerIcinAramaYapipMinMiktardaUrunOldugunuTestEder() throws IOException {
+
+            // adimlari takip ederek exceldeli sayfaya ulas
+
+        String dosyayolu = "src/test/resources/stok.xlsx";
+        FileInputStream fileInputStream = new FileInputStream(dosyayolu);
+        Workbook workbook = WorkbookFactory.create(fileInputStream);
+        Sheet sayfa2 = workbook.getSheet("Sayfa2");
+
+            // exceldeki son satir sayisini bulup
+        int sonSatirIndex = sayfa2.getLastRowNum();
+
+        boolean stoktaOlmayanVarmi = false;
+        // bunu flag olarak kullanıcaz
+        // eger stok miktarini tutturamayan olursa bunu true yapalim
 
 
+            // bir loop ile urunu aratip min sayida urun bulundugunu test eder
+        for (int i = 1; i <= sonSatirIndex ; i++) {
 
+            // once i.indexteki urun ismini ve min urun sayisini excelden okuyup kaydedelim
+            String satirdakiUrunIsmi = sayfa2.getRow(i).getCell(0).toString();
+            String satirdakiMinUrunMiktariStr = sayfa2.getRow(i).getCell(1).toString();
+            double satirdakiMinUrunMiktariDbl = Double.parseDouble(satirdakiMinUrunMiktariStr);
+            int satirdakiMinUrunMiktari = (int)satirdakiMinUrunMiktariDbl;
 
+            // testotomasyon anasayfasina gidelim
+            Driver.getDriver().get(ConfigReader.getProperty("toURL"));
 
+            // kaydettigimiz urun icin arama yapalim
 
+            testOtomasyonPage.aramaKutusu.sendKeys(satirdakiUrunIsmi + Keys.ENTER);
 
+            ReusableMethods.bekle(1);
 
+            // bulunan urun sayisini kaydedelim
+            String actualUrunSayisiStr = testOtomasyonPage.bulunanSayisiElementi.getText();
+            actualUrunSayisiStr = actualUrunSayisiStr.replaceAll("\\D","");
 
+            int actualUrunSayisi = Integer.parseInt(actualUrunSayisiStr);
+
+            // bulunan urun sayisi >= min urun sayisi oldugunu test edelim
+            try {
+                Assert.assertTrue(actualUrunSayisi >= satirdakiMinUrunMiktari);
+            } catch (AssertionError e) {
+                stoktaOlmayanVarmi = true;
+                System.out.println("aranan " + satirdakiUrunIsmi + " min stok sayisi: "
+                                    + satirdakiMinUrunMiktari + ", bulunan urun sayisi: "
+                                    + actualUrunSayisi);
+            }
+
+        }
+        // butun urunler icin assert yapıldıktan sonra
+        // eger failed olan assertion varsa
+        // testimiz AssertionError vermesi icin
+        // olusturdugumuz flagi kullanarak bir assertion yaziyorum
+
+        Assert.assertFalse(stoktaOlmayanVarmi);
+
+        // sayfayi kapatalim
+        Driver.quitDriver();
+    }
 }
