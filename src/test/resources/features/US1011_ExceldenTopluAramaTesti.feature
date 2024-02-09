@@ -7,7 +7,7 @@
       Then urun excelindeki "<istenenSatir>" daki urunun min. miktarini ve urun ismini kaydeder
       And urun ismini testotomasyonu sayfasinda aratir ve sonuc sayisini kaydeder
       And bulunan urun sayisinin kaydedilen min. miktardan fazla oldugunu test eder
-      And sayfayi kapatir
+
 
       Examples:
         |istenenSatir|

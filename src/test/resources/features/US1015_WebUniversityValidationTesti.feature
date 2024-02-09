@@ -13,4 +13,3 @@
       And Ok diyerek Popup'i kapatir
       When Ilk sayfaya geri doner
       Then Ilk sayfaya donuldugunu test eder
-      And sayfayi kapatir

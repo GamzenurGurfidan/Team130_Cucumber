@@ -11,4 +11,3 @@
       Then 2 saniye bekler
       And facebook kayit ol tusuna basar
       Then 2 saniye bekler
-      And sayfayi kapatir

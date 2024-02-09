@@ -9,7 +9,7 @@
       And Create tusuna basar
       When kullanici "<firstname>" ile arama yapar
       Then listede ilk ismin "<firstname>" icerdigini test eder
-      And sayfayi kapatir
+
 
       Examples:
         |firstname |lastname |position |office     |extention |startdate  |salary |

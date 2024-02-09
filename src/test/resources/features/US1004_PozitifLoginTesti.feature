@@ -1,6 +1,6 @@
 
   Feature: US1004 Kullanici gecerli bilgilerle sisteme giris yapabilmeli
-@resim
+@resim @rapor
     Scenario: TC10 gecerli username ve password ile sisteme giris yapabilmeli
       Given kullanici "toURL" anasayfaya gider
       Then account butonuna basar
@@ -9,4 +9,3 @@
       Then signIn butonuna basar
       And basarili giris yapilabildigini test eder
       And 3 saniye bekler
-      And sayfayi kapatir
