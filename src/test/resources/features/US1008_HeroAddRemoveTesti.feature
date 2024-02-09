@@ -1,6 +1,6 @@
 
   Feature: US1008 kullanici ad ve remove butonlarini test eder
-
+@smoke
     Scenario: TC16 kullanici add ve remove butonlarini kullanabilmeli
 
       Given kullanici "heroURL" anasayfaya gider

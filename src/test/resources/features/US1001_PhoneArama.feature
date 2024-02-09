@@ -1,6 +1,6 @@
 
 
-
+@smoke
 Feature: US1001 Kullanici istedigi urun icin arama yapabilmeli
   #Feature user story ile ayni seviyede kullanilir
   #birden fazla test case icerebilir

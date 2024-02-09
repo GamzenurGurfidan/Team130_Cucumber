@@ -1,6 +1,6 @@
 
 
-
+@e2e
 Feature: US1002 Kullanici Background ozelligini kullanir
 
   Background: anasayfaya gitme
